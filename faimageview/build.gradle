@@ -1,0 +1,48 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.3.4'
+    }
+}
+
+publish {
+    userOrg = 'skyfe79'
+    groupId = 'kr.pe.burt.android.lib'
+    artifactId = 'faimageview'
+    publishVersion = '0.0.1'
+    desc = 'FAImageView is a Frame Animation ImageView for Android. You can set multiple frame images and start frame animation like UIImageView in iOS'
+    website = 'https://github.com/skyfe79/FAImageView'
+    issueTracker = "${website}/issues"
+    repository = "${website}.git"
+}
+
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 23
+        versionCode 1
+        versionName "0.0.1"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'kr.pe.burt.android.lib:androidchannel:0.0.3'
+}
