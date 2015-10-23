@@ -72,7 +72,7 @@ public class FAImageView extends ImageView {
                 @Override
                 public void onTime(Timer timer) {
                     currentFrameIndex++;
-                    if(currentFrameIndex == drawableList.size()-1) {
+                    if(currentFrameIndex == drawableList.size()) {
                         if(loop) {
                             currentFrameIndex = 0;
                         } else {

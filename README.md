@@ -9,7 +9,7 @@ FAImageView is a Frame Animation ImageView for Android. You can set multiple fra
 ```groovy
 dependencies {
 	...
-    compile 'kr.pe.burt.android.lib:faimageview:0.0.1'
+    compile 'kr.pe.burt.android.lib:faimageview:0.0.2'
 }
 ```
 
