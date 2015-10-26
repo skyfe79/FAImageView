@@ -1,5 +1,7 @@
 # FAImageView
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FAImageView-green.svg?style=flat)](https://android-arsenal.com/details/1/2682)
+
 FAImageView is a Frame Animation ImageView for Android. You can set multiple frame images and start frame animation like UIImageView in iOS. You can animate multiple image like below!
 
 ![](FAImageView.gif)
