@@ -24,7 +24,8 @@ public class SplashActivity extends AppCompatActivity {
 
         faImageView = (FAImageView)findViewById(R.id.faimageview);
         faImageView.setInterval(1000);
-        faImageView.setLoop(true);
+        faImageView.setLoop(false);
+        faImageView.setRestoreFirstFrameWhenFinishAnimation(false);
         faImageView.addImageFrame(R.drawable.number01);
         faImageView.addImageFrame(R.drawable.number02);
         faImageView.addImageFrame(R.drawable.number03);

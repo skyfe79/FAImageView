@@ -34,6 +34,7 @@ public class FAImageView extends ImageView {
     ArrayList<Drawable> drawableList;
     int currentFrameIndex = 0;
     boolean loop = false;
+    boolean didStoppedAnimation = false;
     int animationRepeatCount = 1;
     boolean restoreFirstFrameWhenFinishAnimation = true;
 
@@ -78,6 +79,8 @@ public class FAImageView extends ImageView {
             throw new IllegalStateException("You shoud add frame at least one frame");
         }
 
+        didStoppedAnimation = false;
+
         if(startAnimationListener != null) {
             startAnimationListener.onStartAnimation();
         }
@@ -101,11 +104,8 @@ public class FAImageView extends ImageView {
                             animationRepeatCount--;
 
                             if(animationRepeatCount == 0) {
-                                if (restoreFirstFrameWhenFinishAnimation) {
-                                    currentFrameIndex = 0;
-                                } else {
-                                    currentFrameIndex = drawableList.size() - 1;
-                                }
+                                currentFrameIndex = drawableList.size() - 1;
+
                                 stopAnimaion();
 
                                 if(finishAnimationListener != null) {
@@ -117,10 +117,18 @@ public class FAImageView extends ImageView {
                             }
                         }
                     }
-                    if(frameChangedListener != null) {
-                        frameChangedListener.onFrameChanged(currentFrameIndex);
+
+                    if ( didStoppedAnimation == false ) {
+                        if (frameChangedListener != null) {
+                            frameChangedListener.onFrameChanged(currentFrameIndex);
+                        }
+                        setImageDrawable(drawableList.get(currentFrameIndex));
+                    } else {
+                        if(restoreFirstFrameWhenFinishAnimation) {
+                            currentFrameIndex = 0;
+                            setImageDrawable(drawableList.get(currentFrameIndex));
+                        }
                     }
-                    setImageDrawable(drawableList.get(currentFrameIndex));
                 }
             });
             timer.stop();
@@ -135,6 +143,7 @@ public class FAImageView extends ImageView {
             timer.stop();
         }
         timer = null;
+        didStoppedAnimation = true;
     }
 
     public void setLoop(boolean loop) {
