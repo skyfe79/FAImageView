@@ -45,6 +45,8 @@ public class SplashActivity extends AppCompatActivity {
                 } else {
                     Log.v("FAImageView", "Animation Finished");
                 }
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -62,14 +64,4 @@ public class SplashActivity extends AppCompatActivity {
         faImageView.startAnimation();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        faImageView.stopAnimaion();
-    }
-
-    public void onNextButtonClicked(View sender) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
 }

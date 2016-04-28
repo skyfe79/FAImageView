@@ -32,9 +32,9 @@ public class FAImageView extends ImageView {
     int interval = DEFAULT_INTERVAL;
 
     ArrayList<Drawable> drawableList;
-    int currentFrameIndex = 0;
+    int currentFrameIndex = -1;
     boolean loop = false;
-    boolean didStoppedAnimation = false;
+    boolean didStoppedAnimation = true;
     int animationRepeatCount = 1;
     boolean restoreFirstFrameWhenFinishAnimation = true;
 
@@ -56,7 +56,7 @@ public class FAImageView extends ImageView {
 
     /**
      * set inteval in milli seconds
-     * @param interval
+     * @param interval interval of a frame.
      */
     public void setInterval(int interval) {
         this.interval = interval;
@@ -79,13 +79,18 @@ public class FAImageView extends ImageView {
             throw new IllegalStateException("You shoud add frame at least one frame");
         }
 
+        if(didStoppedAnimation == false) return;
+
         didStoppedAnimation = false;
 
         if(startAnimationListener != null) {
             startAnimationListener.onStartAnimation();
         }
 
-        currentFrameIndex = 0;
+        // for implementing resume
+        if(currentFrameIndex == -1) {
+            currentFrameIndex = 0;
+        }
         setImageDrawable(drawableList.get(currentFrameIndex));
 
 
@@ -93,6 +98,8 @@ public class FAImageView extends ImageView {
             timer = new Timer(interval, new Timer.OnTimer() {
                 @Override
                 public void onTime(Timer timer) {
+                    if( didStoppedAnimation ) return;
+
                     currentFrameIndex++;
                     if(currentFrameIndex == drawableList.size()) {
                         if(loop) {
@@ -106,7 +113,7 @@ public class FAImageView extends ImageView {
                             if(animationRepeatCount == 0) {
                                 currentFrameIndex = drawableList.size() - 1;
 
-                                stopAnimaion();
+                                stopAnimation();
 
                                 if(finishAnimationListener != null) {
                                     finishAnimationListener.onFinishAnimation(loop);
@@ -138,12 +145,16 @@ public class FAImageView extends ImageView {
         }
     }
 
-    public void stopAnimaion() {
+    public boolean isAnimating() {
+        return didStoppedAnimation == false;
+    }
+
+    public void stopAnimation() {
         if(timer != null && timer.isAlive()) {
             timer.stop();
         }
-        timer = null;
-        didStoppedAnimation = true;
+        timer = null; didStoppedAnimation = true;
+
     }
 
     public void setLoop(boolean loop) {
@@ -159,9 +170,10 @@ public class FAImageView extends ImageView {
     }
 
     public void reset() {
-        stopAnimaion();
+        stopAnimation();
         drawableList.clear();
         drawableList = null;
+        currentFrameIndex = -1;
     }
 
     public void setOnStartAnimationListener(OnStartAnimationListener listener) {
