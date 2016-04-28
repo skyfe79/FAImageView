@@ -29,12 +29,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        faImageView.startAnimation();
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
+    }
+
+    void onStartButtonClicked(View sender) {
+        faImageView.startAnimation();
+    }
+
+    void onStopButtonClicked(View sender) {
         faImageView.stopAnimaion();
     }
 }

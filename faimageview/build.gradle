@@ -14,7 +14,7 @@ publish {
     userOrg = 'skyfe79'
     groupId = 'kr.pe.burt.android.lib'
     artifactId = 'faimageview'
-    publishVersion = '0.0.2'
+    publishVersion = '0.0.4'
     desc = 'FAImageView is a Frame Animation ImageView for Android. You can set multiple frame images and start frame animation like UIImageView in iOS'
     website = 'https://github.com/skyfe79/FAImageView'
     issueTracker = "${website}/issues"
@@ -24,13 +24,13 @@ publish {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.0"
 
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 23
-        versionCode 2
-        versionName "0.0.2"
+        versionCode 4
+        versionName "0.0.4"
     }
     buildTypes {
         release {
@@ -42,7 +42,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'kr.pe.burt.android.lib:androidchannel:0.0.3'
+    compile 'kr.pe.burt.android.lib:androidchannel:0.0.4'
 }

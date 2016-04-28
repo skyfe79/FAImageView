@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -28,6 +29,30 @@ public class SplashActivity extends AppCompatActivity {
         faImageView.addImageFrame(R.drawable.number02);
         faImageView.addImageFrame(R.drawable.number03);
 
+        faImageView.setOnStartAnimationListener(new FAImageView.OnStartAnimationListener() {
+            @Override
+            public void onStartAnimation() {
+                Log.v("FAImageView", "Animation started");
+            }
+        });
+
+        faImageView.setOnFinishAnimationListener(new FAImageView.OnFinishAnimationListener() {
+            @Override
+            public void onFinishAnimation(boolean isLoopAnimation) {
+                if(isLoopAnimation) {
+                    Log.v("FAImageView", "Finish an animation cycle");
+                } else {
+                    Log.v("FAImageView", "Animation Finished");
+                }
+            }
+        });
+
+        faImageView.setOnFrameChangedListener(new FAImageView.OnFrameChangedListener() {
+            @Override
+            public void onFrameChanged(int index) {
+                Log.v("FAImageView", String.format("frame has changed %d", index));
+            }
+        });
     }
 
     @Override
@@ -42,7 +67,7 @@ public class SplashActivity extends AppCompatActivity {
         faImageView.stopAnimaion();
     }
 
-    void onNextButtonClicked(View sender) {
+    public void onNextButtonClicked(View sender) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

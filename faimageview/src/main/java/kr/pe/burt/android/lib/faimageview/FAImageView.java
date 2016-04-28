@@ -14,6 +14,18 @@ import kr.pe.burt.android.lib.androidchannel.Timer;
  */
 public class FAImageView extends ImageView {
 
+    public interface OnStartAnimationListener {
+        void onStartAnimation();
+    }
+
+    public interface OnFinishAnimationListener {
+        void onFinishAnimation(boolean isLoopAnimation);
+    }
+
+    public interface OnFrameChangedListener {
+        void onFrameChanged(int index);
+    }
+
     private final static int DEFAULT_INTERVAL = 1000;       // 1s
 
     Timer timer;
@@ -25,6 +37,9 @@ public class FAImageView extends ImageView {
     int animationRepeatCount = 1;
     boolean restoreFirstFrameWhenFinishAnimation = true;
 
+    private OnStartAnimationListener    startAnimationListener  = null;
+    private OnFrameChangedListener      frameChangedListener    = null;
+    private OnFinishAnimationListener   finishAnimationListener = null;
 
     public FAImageView(Context context) {
         this(context, null);
@@ -51,6 +66,7 @@ public class FAImageView extends ImageView {
 
         if(drawableList == null) {
             drawableList = new ArrayList<>();
+            setImageDrawable(getContext().getResources().getDrawable(resId));
         }
         drawableList.add(getContext().getResources().getDrawable(resId));
 
@@ -62,6 +78,9 @@ public class FAImageView extends ImageView {
             throw new IllegalStateException("You shoud add frame at least one frame");
         }
 
+        if(startAnimationListener != null) {
+            startAnimationListener.onStartAnimation();
+        }
 
         currentFrameIndex = 0;
         setImageDrawable(drawableList.get(currentFrameIndex));
@@ -74,6 +93,9 @@ public class FAImageView extends ImageView {
                     currentFrameIndex++;
                     if(currentFrameIndex == drawableList.size()) {
                         if(loop) {
+                            if(finishAnimationListener != null) {
+                                finishAnimationListener.onFinishAnimation(loop);
+                            }
                             currentFrameIndex = 0;
                         } else {
                             animationRepeatCount--;
@@ -85,10 +107,18 @@ public class FAImageView extends ImageView {
                                     currentFrameIndex = drawableList.size() - 1;
                                 }
                                 stopAnimaion();
+
+                                if(finishAnimationListener != null) {
+                                    finishAnimationListener.onFinishAnimation(loop);
+                                }
+
                             } else {
                                 currentFrameIndex = 0;
                             }
                         }
+                    }
+                    if(frameChangedListener != null) {
+                        frameChangedListener.onFrameChanged(currentFrameIndex);
                     }
                     setImageDrawable(drawableList.get(currentFrameIndex));
                 }
@@ -123,5 +153,17 @@ public class FAImageView extends ImageView {
         stopAnimaion();
         drawableList.clear();
         drawableList = null;
+    }
+
+    public void setOnStartAnimationListener(OnStartAnimationListener listener) {
+        startAnimationListener = listener;
+    }
+
+    public void setOnFrameChangedListener(OnFrameChangedListener listener) {
+        frameChangedListener = listener;
+    }
+
+    public void setOnFinishAnimationListener(OnFinishAnimationListener listener) {
+        finishAnimationListener = listener;
     }
 }
