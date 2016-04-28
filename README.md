@@ -102,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        faImageView1.stopAnimaion();
-        faImageView2.stopAnimaion();
+        faImageView1.stopAnimation();
+        faImageView2.stopAnimation();
     }
 }
 ```
