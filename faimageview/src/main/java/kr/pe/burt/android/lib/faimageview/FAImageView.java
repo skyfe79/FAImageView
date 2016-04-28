@@ -51,6 +51,7 @@ public class FAImageView extends ImageView {
 
         if(drawableList == null) {
             drawableList = new ArrayList<>();
+            setImageDrawable(getContext().getResources().getDrawable(resId));
         }
         drawableList.add(getContext().getResources().getDrawable(resId));
 
@@ -61,7 +62,6 @@ public class FAImageView extends ImageView {
         if(drawableList == null || drawableList.size() == 0) {
             throw new IllegalStateException("You shoud add frame at least one frame");
         }
-
 
         currentFrameIndex = 0;
         setImageDrawable(drawableList.get(currentFrameIndex));

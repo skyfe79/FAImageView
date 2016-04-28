@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="androidchannel-0.0.3">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/kr.pe.burt.android.lib/androidchannel/0.0.3/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/kr.pe.burt.android.lib/androidchannel/0.0.3/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/kr.pe.burt.android.lib/androidchannel/0.0.3/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

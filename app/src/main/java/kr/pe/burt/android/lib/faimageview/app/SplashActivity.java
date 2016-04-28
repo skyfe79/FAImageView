@@ -33,13 +33,13 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        faImageView.startAnimation();
+        //faImageView.startAnimation();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        faImageView.stopAnimaion();
+        //faImageView.stopAnimaion();
     }
 
     void onNextButtonClicked(View sender) {
