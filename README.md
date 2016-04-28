@@ -11,7 +11,7 @@ FAImageView is a Frame Animation ImageView for Android. You can set multiple fra
 ```groovy
 dependencies {
 	...
-    compile 'kr.pe.burt.android.lib:faimageview:0.0.2'
+    compile 'kr.pe.burt.android.lib:faimageview:0.0.4'
 }
 ```
 
@@ -107,7 +107,43 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
+## Callbacks
 
+FAImageView provides some listeners for animation event.
+
+ * for listening to animation start.
+  * OnStartAnimationListener
+ * for listening to animation completion.
+  * OnFinishAnimationListener
+ * for listening to animation frame change event
+  * OnFrameChangedListener
+
+```java
+faImageView.setOnStartAnimationListener(new FAImageView.OnStartAnimationListener() {
+    @Override
+    public void onStartAnimation() {
+        Log.v("FAImageView", "Animation started");
+    }
+});
+
+faImageView.setOnFinishAnimationListener(new FAImageView.OnFinishAnimationListener() {
+    @Override
+    public void onFinishAnimation(boolean isLoopAnimation) {
+        if(isLoopAnimation) {
+            Log.v("FAImageView", "finished an animation cycle.");
+        } else {
+            Log.v("FAImageView", "Animation is completed");
+        }
+    }
+});
+
+faImageView.setOnFrameChangedListener(new FAImageView.OnFrameChangedListener() {
+    @Override
+    public void onFrameChanged(int index) {
+        Log.v("FAImageView", String.format("frameIndex : %d", index));
+    }
+});
+```  	
 
 ## APIs
 
@@ -125,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
  * start animation
 * stopAnimation
  * stop animation
+* isAnimating
+ * check it's now animating   
 * reset
  * clear all resources and stop animation.
 
