@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         faImageView = (FAImageView)findViewById(R.id.faimageview);
-        faImageView.setInterval(5000);
+        faImageView.setInterval(1000);
         faImageView.setLoop(true);
         faImageView.addImageFrame(R.drawable.number01);
         faImageView.addImageFrame(R.drawable.number02);
@@ -67,7 +67,7 @@ public class SplashActivity extends AppCompatActivity {
         faImageView.stopAnimaion();
     }
 
-    void onNextButtonClicked(View sender) {
+    public void onNextButtonClicked(View sender) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
