@@ -68,6 +68,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void onStopButtonClicked(View sender) {
-        faImageView.stopAnimaion();
+        faImageView.stopAnimation();
     }
 }
