@@ -1,6 +1,10 @@
 package kr.pe.burt.android.lib.faimageview.app;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -26,9 +30,18 @@ public class SplashActivity extends AppCompatActivity {
         faImageView.setInterval(1000);
         faImageView.setLoop(false);
         faImageView.setRestoreFirstFrameWhenFinishAnimation(false);
+
+        Bitmap number01 = BitmapFactory.decodeResource(getResources(), R.drawable.number01);
+        Bitmap number02 = BitmapFactory.decodeResource(getResources(), R.drawable.number02);
+        Bitmap number03 = BitmapFactory.decodeResource(getResources(), R.drawable.number03);
+
         faImageView.addImageFrame(R.drawable.number01);
         faImageView.addImageFrame(R.drawable.number02);
         faImageView.addImageFrame(R.drawable.number03);
+        faImageView.addImageFrame(number01);
+        faImageView.addImageFrame(number02);
+        faImageView.addImageFrame(number03);
+        faImageView.addImageFrame(shapeDrawableToBitmap(getResources().getDrawable(R.drawable.circle), 300, 300));
 
         faImageView.setOnStartAnimationListener(new FAImageView.OnStartAnimationListener() {
             @Override
@@ -64,4 +77,12 @@ public class SplashActivity extends AppCompatActivity {
         faImageView.startAnimation();
     }
 
+    private Bitmap shapeDrawableToBitmap(Drawable drawable, int width, int height) {
+        Canvas canvas = new Canvas();
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        canvas.setBitmap(bitmap);
+        drawable.setBounds(0, 0, width, height);
+        drawable.draw(canvas);
+        return bitmap;
+    }
 }

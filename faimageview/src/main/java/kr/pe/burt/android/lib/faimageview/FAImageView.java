@@ -1,6 +1,8 @@
 package kr.pe.burt.android.lib.faimageview;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -71,6 +73,19 @@ public class FAImageView extends ImageView {
         }
         drawableList.add(getContext().getResources().getDrawable(resId));
 
+    }
+
+    public void addImageFrame(Drawable drawable) {
+        if(drawableList == null) {
+            drawableList = new ArrayList<>();
+            setImageDrawable(drawable);
+        }
+        drawableList.add(drawable);
+    }
+
+    public void addImageFrame(Bitmap bitmap) {
+        Drawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
+        addImageFrame(bitmapDrawable);
     }
 
     public void startAnimation() {
