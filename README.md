@@ -11,7 +11,7 @@ FAImageView is a Frame Animation ImageView for Android. You can set multiple fra
 ```groovy
 dependencies {
 	...
-    compile 'kr.pe.burt.android.lib:faimageview:0.0.4'
+    compile 'kr.pe.burt.android.lib:faimageview:0.0.5'
 }
 ```
 
@@ -150,6 +150,8 @@ faImageView.setOnFrameChangedListener(new FAImageView.OnFrameChangedListener() {
 * setInterval(int milli)
  * set frame interval for animation in milli seconds
 * addImageFrame(int resId)
+* addImageFrame(Drawable drawable)
+* addImageFrame(Bitmap bitmap)
  * add an Image Frame
 * setLoop(boolean loop)
  * If you want to animate infinitely set true or false. Default value is false.
