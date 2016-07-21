@@ -186,8 +186,10 @@ public class FAImageView extends ImageView {
 
     public void reset() {
         stopAnimation();
-        drawableList.clear();
-        drawableList = null;
+        if(drawableList != null){
+            drawableList.clear();
+            drawableList = null; 
+        }
         currentFrameIndex = -1;
     }
 
