@@ -125,7 +125,7 @@ public class FAImageView extends ImageView {
                         } else {
                             animationRepeatCount--;
 
-                            if(animationRepeatCount == 0) {
+                            if(animationRepeatCount <= 0) {
                                 currentFrameIndex = drawableList.size() - 1;
 
                                 stopAnimation();
