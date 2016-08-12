@@ -147,9 +147,9 @@ public class FAImageView extends ImageView {
                         setImageDrawable(drawableList.get(currentFrameIndex));
                     } else {
                         if(restoreFirstFrameWhenFinishAnimation) {
-                            currentFrameIndex = 0;
-                            setImageDrawable(drawableList.get(currentFrameIndex));
+                            setImageDrawable(drawableList.get(0));
                         }
+                        currentFrameIndex = -1;
                     }
                 }
             });
